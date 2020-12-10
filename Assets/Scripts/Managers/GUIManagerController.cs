@@ -40,7 +40,8 @@ public class GUIManagerController : MonoBehaviour
     public GameObject uiPausePanel; //открывающаяся панель при паузе 
 
     private bool trackMovement = false;
-    private int zoomX = 0, zoomY = 0, zoomZ = 0;
+    private bool _zooming = false;
+    private bool _zoomIn;
 
     public void OpenOrClosePanel()
     {
@@ -96,7 +97,7 @@ public class GUIManagerController : MonoBehaviour
         {
             if(trackMovement)
             {
-                cam.gameObject.transform.position = new Vector3(selectSpaceObject.transform.position.x - selectSpaceObject.transform.localScale.x + zoomX, selectSpaceObject.transform.localScale.y + zoomY, selectSpaceObject.transform.position.z - selectSpaceObject.transform.localScale.z + zoomZ);
+                cam.gameObject.transform.position = new Vector3(selectSpaceObject.transform.position.x - selectSpaceObject.transform.localScale.x, selectSpaceObject.transform.localScale.y, selectSpaceObject.transform.position.z - selectSpaceObject.transform.localScale.z);
                 cam.gameObject.transform.LookAt(selectSpaceObject.transform);
             }
             else
@@ -135,31 +136,64 @@ public class GUIManagerController : MonoBehaviour
     }
     public void TrackMovement() //Переключение камеры к космическому объекту
     {
-        cam.orthographic = false; //Переключение камеры в режим "перспектива"
         trackMovement = true;
         excretion.SetActive(false);
     }
     public void TrackSolarSystem() //Переключение камеры к солнечной системе
     {
-        cam.orthographic = true; //Переключение камеры в режим "ортография"
         trackMovement = false;
-        cam.gameObject.transform.position = new Vector3(17623, 1000, 0);
+        cam.gameObject.transform.position = new Vector3(20000, 40000, 0);
         cam.gameObject.transform.rotation = Quaternion.Euler(90, 0, 0);
         if(selectSpaceObject == null) excretion.SetActive(false);
     }
 
-    int zoom = 20;
-    int normal = 60;
-    float smooth = 5;
-    
     //Зумирование
-    public void ZoomIn() //Прибоизить камеру
+    //Прибоизить камеру
+    public void ZoomIn_ButtonDown() 
     {
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView,zoom,Time.deltaTime*smooth);
+        _zooming = true;
+        _zoomIn = true;
+        StartCoroutine(ZoomInOut());
     }
-    public void ZoomOut() //Отдалить камеру
+    public void ZoomIn_ButtonUp()
     {
-        cam.fieldOfView = -Mathf.Lerp(cam.fieldOfView,zoom,Time.deltaTime*smooth);
+        _zooming = false;
+        StopCoroutine(ZoomInOut());
+    }
+    //Отдалить камеру
+    public void ZoomOut_ButtonDown()
+    {
+        _zoomIn = false;
+        _zooming = true;
+        StartCoroutine(ZoomInOut());
+    }
+    public void ZoomOut_ButtonUp()
+    {
+        _zooming = false;
+        StopCoroutine(ZoomInOut());
+    }
+
+    IEnumerator ZoomInOut() //Изменение позиции камеры (зумирование)
+    {
+        while(_zooming)
+        {
+            if(_zoomIn)
+            {
+                if(cam.gameObject.transform.position != new Vector3(500, 1000, 0))
+                {
+                    cam.gameObject.transform.position = new Vector3(cam.gameObject.transform.position.x - 250f, cam.gameObject.transform.position.y - 500f, cam.gameObject.transform.position.z);
+                }
+            }
+            else
+            {
+                if(cam.gameObject.transform.position != new Vector3(20000, 40000, 0))
+                {
+                    cam.gameObject.transform.position = new Vector3(cam.gameObject.transform.position.x + 250f, cam.gameObject.transform.position.y + 500f, cam.gameObject.transform.position.z);
+                }
+            }
+
+            yield return new WaitForSecondsRealtime(0.05f);
+        }
     }
 
     /*Панель "Действия"*/

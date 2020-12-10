@@ -18,14 +18,6 @@ public class GUIMainMenu : MonoBehaviour
         UIPanelStartPanel.SetActive(false);
         UIPanelSettings.SetActive(true);
     }
-    public void StartSimulation()
-    {
-        SceneManager.LoadScene(1);
-    }
-    public void StartSandBox()
-    {
-        SceneManager.LoadScene(2);
-    }
     public void Back()
     {
         if(UIPanelSelectingGame.activeSelf) 

@@ -17,9 +17,9 @@ public class BlackHole : MonoBehaviour
         foreach(var obj in spaceObjects)
         {
             obj.transform.position = GetPositon(this.gameObject.transform.position, obj.GetComponent<TheSpace.SpaceObject>().distance, obj.GetComponent<TheSpace.SpaceObject>().currentAng, obj.GetComponent<TheSpace.SpaceObject>().offsetSin, obj.GetComponent<TheSpace.SpaceObject>().offsetCos); //Вращение вокруг объекта
-            obj.transform.position += ((this.gameObject.transform.position - obj.transform.position).normalized * forceOfGravity * Time.deltaTime) / (obj.GetComponent<TheSpace.SpaceObject>().mass/100);
+            obj.transform.position += ((this.gameObject.transform.position - obj.transform.position).normalized * forceOfGravity * Time.deltaTime) / (obj.GetComponent<TheSpace.SpaceObject>().mass*10);
             obj.transform.Rotate(Vector3.up * obj.GetComponent<TheSpace.SpaceObject>().linearRotationSpeed/10000);
-            obj.GetComponent<TheSpace.SpaceObject>().currentAng += (forceOfGravity / (obj.GetComponent<TheSpace.SpaceObject>().mass*100) * Time.deltaTime);
+            obj.GetComponent<TheSpace.SpaceObject>().currentAng += (forceOfGravity / (obj.GetComponent<TheSpace.SpaceObject>().mass*100000) * Time.deltaTime);
         }
     }
 
