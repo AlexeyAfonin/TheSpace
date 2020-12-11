@@ -42,6 +42,7 @@ public class ClapmButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
                 {
                     holdDuration = 0;
                     multiplication *= 10;
+                    if(maxDuration < 1000) maxDuration *= 10;
                     if(multiplication >= 100) multiplication = 10;
                 }
 
@@ -59,9 +60,18 @@ public class ClapmButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
                 {
                     switch(changeElement)
                     {
-                        case Element.Mass: guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().mass -= 1*multiplication; break;
-                        case Element.Radius: guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().radius -= 1*multiplication; break;
-                        case Element.Density: guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().density -= 1*multiplication; break;
+                        case Element.Mass: 
+                            if(guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().mass > 0)
+                                guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().mass -= 1*multiplication; 
+                            break;
+                        case Element.Radius: 
+                            if(guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().radius > 0)
+                                guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().radius -= 1*multiplication;
+                            break;
+                        case Element.Density: 
+                            if(guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().density > 0)
+                                guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().density -= 1*multiplication; 
+                            break;
                         case Element.SurfaceTemperature: guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().surfaceTemperature -= 1*multiplication; break;
                     }
                 }

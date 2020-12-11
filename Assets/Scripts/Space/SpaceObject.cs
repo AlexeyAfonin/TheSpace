@@ -52,10 +52,13 @@ namespace TheSpace
         private bool attracts;
         [HideInInspector] public bool screeningObject;
 
+        private Rigidbody rb;
+
         void Start()
         {
             guiMC = GameObject.FindWithTag("Manager").GetComponent<GUIManagerController>();
             gameMC = GameObject.FindWithTag("Manager").GetComponent<GameManagerController>();
+            rb = this.gameObject.GetComponent<Rigidbody>();
 
             if(typeThisObject != TypeObject.Star)
                 distance = distanceToTheSun * 10; //Объект, вогруг которого вращаемся
@@ -69,6 +72,7 @@ namespace TheSpace
             escapeVelocity = Convert.ToSingle(PhysicsFormuls.GetSecondSpaceSpeed(surfaceGravity, radius));
             firstSpaceSpeed = Convert.ToSingle(PhysicsFormuls.GetFirstSpaceSpeed(mass, radius));
             linearRotationSpeed = Convert.ToSingle(PhysicsFormuls.GetLinerRotationSpeed(rotationalPeriodAroundAxis, radius));
+            rb.mass = mass/100;
 
             if(typeThisObject != TypeObject.BlackHole)
             {
@@ -123,9 +127,17 @@ namespace TheSpace
 
             if((typeThisObject != TypeObject.Star)&&(blackHole == null))
             {
-                this.transform.position = GetPositon(aroundObject.position, distance, currentAng, offsetSin, offsetCos); //Вращение вокруг объекта
-                this.transform.Rotate(Vector3.up * linearRotationSpeed/1000); //Вращение вокруг своей оси
-                currentAng += (totalVelocity/1000) * Time.deltaTime;
+                try
+                {
+                    this.transform.position = GetPositon(aroundObject.position, distance, currentAng, offsetSin, offsetCos); //Вращение вокруг объекта
+                    this.transform.Rotate(Vector3.up * linearRotationSpeed/1000); //Вращение вокруг своей оси
+                    currentAng += (totalVelocity/1000) * Time.deltaTime;
+                }
+                catch
+                {
+                    aroundObject = null;
+                    Debug.Log("ERROR: Around object is missing!");
+                }
             }
         }
 
@@ -215,5 +227,11 @@ namespace TheSpace
             yield return new WaitForSecondsRealtime(1f);
             StopCoroutine(UpdateButton());
         }
+
+        /*private void OnCollisionEnter(Collision other) 
+        {
+            other.gameObject.GetComponent<TheSpace.SpaceObject>().exploded = true;
+            exploded = true;
+        }*/
     }
 }
