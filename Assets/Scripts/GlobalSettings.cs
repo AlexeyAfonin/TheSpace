@@ -13,7 +13,7 @@ public class GlobalSettings : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    void Start()
+    private void Start()
     {
         gameVolume = 50;
         musicVolume = 50;

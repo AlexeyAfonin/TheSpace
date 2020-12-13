@@ -17,7 +17,7 @@ public class AudioManager : MonoBehaviour
     
     private GameObject gSettings;
 
-    void Start()
+    private void Start()
     {
         gSettings = GameObject.Find("GlobalSettingsManager");
 
@@ -25,7 +25,7 @@ public class AudioManager : MonoBehaviour
         volumeGameSlider.value = gSettings.GetComponent<GlobalSettings>().gameVolume;
     }
 
-    void Update()
+    private void Update()
     {
         musicVolume = volumeMusicSlider.value;
         gSettings.GetComponent<GlobalSettings>().musicVolume = musicVolume;

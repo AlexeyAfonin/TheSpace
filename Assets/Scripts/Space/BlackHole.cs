@@ -12,7 +12,7 @@ public class BlackHole : MonoBehaviour
 
     private GUIManagerController guiMC;
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         foreach(var obj in spaceObjects)
         {
@@ -23,14 +23,14 @@ public class BlackHole : MonoBehaviour
         }
     }
 
-    Vector3 GetPositon(Vector3 around, float dist, float angle, float sin, float cos) //Получение позции
+    private Vector3 GetPositon(Vector3 around, float dist, float angle, float sin, float cos) //Получение позции
     {
         around.x += Mathf.Sin(angle) * dist * sin;
         around.z += Mathf.Cos(angle) * dist * cos;
         return around;
     }
 
-    void Update() 
+    private void Update() 
     {
         if(this.gameObject.transform.localScale.x >= 1000000f) 
             Destroy(this.gameObject);
@@ -40,7 +40,7 @@ public class BlackHole : MonoBehaviour
         guiMC.radius.text = this.gameObject.GetComponent<TheSpace.SpaceObject>().radius.ToString() + " км";
     }
 
-    void OnTriggerEnter(Collider other) 
+    private void OnTriggerEnter(Collider other) 
     {
         this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x + other.GetComponent<TheSpace.SpaceObject>().density*10, this.gameObject.transform.localScale.y + other.GetComponent<TheSpace.SpaceObject>().density*10, this.gameObject.transform.localScale.z + other.GetComponent<TheSpace.SpaceObject>().density*10); 
         spaceObjects.Remove(other.gameObject);

@@ -10,6 +10,7 @@ namespace TheSpace
     {
         private GUIManagerController guiMC;
         private GameManagerController gameMC;
+        private StarEvolution _starEvolution;
         public enum TypeObject {Planet, Satellite, Star, BlackHole}; //Список типов космических объектов
         public enum TypeStar {Light, Heavy}; //Список типов звезд
 
@@ -47,24 +48,24 @@ namespace TheSpace
 
         [Header ("Настройки")]
         public int power;
-
+        
         private GameObject blackHole;
         private bool attracts;
         [HideInInspector] public bool screeningObject;
-
         private Rigidbody rb;
+        
 
-        void Start()
+        private void Start()
         {
             guiMC = GameObject.FindWithTag("Manager").GetComponent<GUIManagerController>();
             gameMC = GameObject.FindWithTag("Manager").GetComponent<GameManagerController>();
+            _starEvolution = GameObject.FindWithTag("Manager").GetComponent<StarEvolution>();
             rb = this.gameObject.GetComponent<Rigidbody>();
 
-            if(typeThisObject != TypeObject.Star)
-                distance = distanceToTheSun * 10; //Объект, вогруг которого вращаемся
+            if(aroundObject != null) distance = distanceToTheSun * 10; //дистанция между этим объектом и объектом, вогруг которого вращаемся
         }
 
-        void Update()
+        private void Update()
         {
             /*Вычисления*/
             totalVelocity = Convert.ToSingle(PhysicsFormuls.GetTotalVelocity(distanceToTheSun, rotationalPeriodAroundSun));
@@ -85,6 +86,7 @@ namespace TheSpace
             {
                 guiMC.selectSpaceObject = this.gameObject;
                 gameMC.selectedObject = this.gameObject;
+                _starEvolution.selectedObject = this.gameObject;
 
                 if(typeThisObject == TypeObject.Planet)  guiMC.type.text = "Планета";
                 if(typeThisObject == TypeObject.Satellite)  guiMC.type.text = "Спутник";
@@ -111,7 +113,7 @@ namespace TheSpace
             }
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             /*Взаимодействие с черной дырой*/
             if((blackHole != null)&&(typeThisObject != TypeObject.BlackHole))
@@ -123,25 +125,20 @@ namespace TheSpace
                     attracts = true;
                 }   
             }
-            else blackHole = GameObject.FindGameObjectWithTag("BlackHole");
-
-            if((typeThisObject != TypeObject.Star)&&(blackHole == null))
+            else 
             {
-                try
+                blackHole = GameObject.FindGameObjectWithTag("BlackHole"); //Ищем черную дыру на сцене
+
+                if((aroundObject != null)&&(blackHole == null)) //Вращение объекта по орбите
                 {
                     this.transform.position = GetPositon(aroundObject.position, distance, currentAng, offsetSin, offsetCos); //Вращение вокруг объекта
                     this.transform.Rotate(Vector3.up * linearRotationSpeed/1000); //Вращение вокруг своей оси
                     currentAng += (totalVelocity/1000) * Time.deltaTime;
                 }
-                catch
-                {
-                    aroundObject = null;
-                    Debug.Log("ERROR: Around object is missing!");
-                }
             }
         }
 
-        Vector3 GetPositon(Vector3 around, float dist, float angle, float sin, float cos) //Получение позции
+        private Vector3 GetPositon(Vector3 around, float dist, float angle, float sin, float cos) //Получение позции
         {
             around.x += Mathf.Sin(angle) * dist * sin;
             around.z += Mathf.Cos(angle) * dist * cos;
@@ -153,7 +150,7 @@ namespace TheSpace
             onSelected = true;
         } 
 
-        IEnumerator  CreatePhotoStar()
+        private IEnumerator  CreatePhotoStar()
         {
             yield return new WaitForSecondsRealtime(1f);
             
@@ -213,7 +210,7 @@ namespace TheSpace
             StartCoroutine(UpdateButton());
             StopCoroutine(CreatePhotoStar());
         }
-        IEnumerator  UpdateButton()
+        private IEnumerator UpdateButton()
         {
             //Меняем изображене кнопки выбора объекта
             GameObject buttonSelect = GameObject.Find("Sun_UIImage");

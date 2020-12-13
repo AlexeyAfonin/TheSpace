@@ -98,7 +98,8 @@ public class GUIManagerController : MonoBehaviour
             if(trackMovement)
             {
                 cam.gameObject.transform.position = new Vector3(selectSpaceObject.transform.position.x - selectSpaceObject.transform.localScale.x, selectSpaceObject.transform.localScale.y, selectSpaceObject.transform.position.z - selectSpaceObject.transform.localScale.z);
-                cam.gameObject.transform.LookAt(selectSpaceObject.transform);
+                cam.gameObject.transform.LookAt(new Vector3(selectSpaceObject.transform.position.x, selectSpaceObject.transform.position.y, selectSpaceObject.transform.position.z));
+                excretion.SetActive(false);
             }
             else
             {
@@ -173,7 +174,7 @@ public class GUIManagerController : MonoBehaviour
         StopCoroutine(ZoomInOut());
     }
 
-    IEnumerator ZoomInOut() //Изменение позиции камеры (зумирование)
+    private IEnumerator ZoomInOut() //Изменение позиции камеры (зумирование)
     {
         while(_zooming)
         {
@@ -221,5 +222,9 @@ public class GUIManagerController : MonoBehaviour
 
     /*Панель "Ировое меню"*/
     public void Back(){uiPausePanel.SetActive(false);} //Скрытие pause панели
-    public void Quit(){UnityEngine.SceneManagement.SceneManager.LoadScene(0);} //Выход в главное меню
+    public void Quit()
+    {
+        GameObject.Destroy(GameObject.Find("DebugPanel"));
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    } //Выход в главное меню
 }

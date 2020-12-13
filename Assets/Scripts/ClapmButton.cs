@@ -12,7 +12,7 @@ public class ClapmButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
     public Operatinon operatinon;
     private bool click = false;
 
-    void Start()
+    private void Start()
     {
         guiMC =  GameObject.FindWithTag("Manager").GetComponent<GUIManagerController>();
     }
@@ -28,7 +28,7 @@ public class ClapmButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         StopCoroutine(Change());
     }
 
-    IEnumerator Change() //Изменение значения
+    private IEnumerator Change() //Изменение значения
     {
         int holdDuration = 0;
         int multiplication = 1;

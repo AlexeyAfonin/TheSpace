@@ -11,17 +11,17 @@ public class DebugManager : MonoBehaviour
     private double lastInterval;
     private float fps;
     
-    void Awake()
+    private void Awake()
     {
         DontDestroyOnLoad(this);
     }
 
-    void Start() 
+    private void Start() 
     {
         lastInterval = Time.realtimeSinceStartup;
     }
     
-    void Update() 
+    private void Update() 
     {
         float timeNow = Time.realtimeSinceStartup;
         if (timeNow > lastInterval + updateInterval) 

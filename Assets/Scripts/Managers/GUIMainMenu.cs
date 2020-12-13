@@ -8,6 +8,7 @@ public class GUIMainMenu : MonoBehaviour
     [SerializeField] private GameObject UIPanelStartPanel;
     [SerializeField] private GameObject UIPanelSelectingGame;
     [SerializeField] private GameObject UIPanelSettings;
+
     public void OpenUIStartGamePanel()
     {
         UIPanelStartPanel.SetActive(false);

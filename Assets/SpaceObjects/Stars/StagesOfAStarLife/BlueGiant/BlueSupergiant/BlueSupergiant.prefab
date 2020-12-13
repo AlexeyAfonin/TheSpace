@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &865632380558643469
+--- !u!1 &4309399410739277148
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1510524982194307566}
-  - component: {fileID: 5394891960839647112}
+  - component: {fileID: 4309399410739277151}
+  - component: {fileID: 4309399410739277150}
   m_Layer: 0
-  m_Name: WhiteDwarfLight
+  m_Name: BlueSupergiantLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1510524982194307566
+--- !u!4 &4309399410739277151
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865632380558643469}
+  m_GameObject: {fileID: 4309399410739277148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1057, y: 11627, z: 1057}
+  m_LocalScale: {x: 1, y: 11, z: 1}
   m_Children: []
-  m_Father: {fileID: 7327606428047659785}
+  m_Father: {fileID: 4309399412268280620}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &5394891960839647112
+--- !u!108 &4309399410739277150
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 865632380558643469}
+  m_GameObject: {fileID: 4309399410739277148}
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.8632076, g: 0.98746485, b: 1, a: 1}
-  m_Intensity: 2500000
-  m_Range: 25000
+  m_Color: {r: 0.3537736, g: 0.8226063, b: 1, a: 1}
+  m_Intensity: 200000000
+  m_Range: 100000
   m_SpotAngle: 179
   m_InnerSpotAngle: 179
   m_CookieSize: 10
@@ -92,7 +92,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &7327606428047659786
+--- !u!1 &4309399412268280619
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,42 +100,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7327606428047659785}
-  - component: {fileID: 7327606428047659784}
-  - component: {fileID: 7327606428047659787}
-  - component: {fileID: 548770588809695398}
-  - component: {fileID: 4929461839697248350}
+  - component: {fileID: 4309399412268280620}
+  - component: {fileID: 4309399412268280621}
+  - component: {fileID: 4309399412268280618}
+  - component: {fileID: 4309399412268280622}
+  - component: {fileID: 4309399412268280623}
   m_Layer: 0
-  m_Name: WhiteDwarf
-  m_TagString: Star
+  m_Name: BlueSupergiant
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7327606428047659785
+--- !u!4 &4309399412268280620
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7327606428047659786}
+  m_GameObject: {fileID: 4309399412268280619}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200.71295, y: -1245.2085, z: -3982.2966}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1057, y: 1057, z: 1057}
   m_Children:
-  - {fileID: 1510524982194307566}
+  - {fileID: 4309399410739277151}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &7327606428047659784
+--- !u!2083052967 &4309399412268280621
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7327606428047659786}
+  m_GameObject: {fileID: 4309399412268280619}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 5e2810f147e636848bfc43eb47e2c8e9, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 12d6448e12b7dbb48812761f98c7a974, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -163,13 +163,13 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &7327606428047659787
+--- !u!73398921 &4309399412268280618
 VFXRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7327606428047659786}
+  m_GameObject: {fileID: 4309399412268280619}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -203,13 +203,29 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &548770588809695398
+--- !u!54 &4309399412268280622
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4309399412268280619}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &4309399412268280623
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7327606428047659786}
+  m_GameObject: {fileID: 4309399412268280619}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24d7c8fbfeca6224bae6036c5ab444f2, type: 3}
@@ -235,27 +251,11 @@ MonoBehaviour:
   escapeVelocity: 0
   distanceToTheSun: 0
   linearRotationSpeed: 0
-  onSelected: 1
+  onSelected: 0
   exploded: 0
-  typeThisStar: 0
+  typeThisStar: 1
   stageLifeThisStar: 0
   nextStage: 0
   backStage: 0
-  power: 15
+  power: 0
   screeningObject: 0
---- !u!54 &4929461839697248350
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7327606428047659786}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0

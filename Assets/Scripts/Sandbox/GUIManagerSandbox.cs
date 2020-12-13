@@ -18,7 +18,7 @@ public class GUIManagerSandbox : MonoBehaviour
     [SerializeField] private Image _thisColor;
     public Color32 colorStar;
 
-    void Update()
+    private void Update()
     {
         _howRed.text = _redColor.value.ToString();
         _howGreen.text = _greenColor.value.ToString();
