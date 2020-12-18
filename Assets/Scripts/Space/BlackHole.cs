@@ -8,18 +8,18 @@ public class BlackHole : MonoBehaviour
     public List<GameObject> spaceObjects;
 
     [Header("Сила притяжения")] 
-    [SerializeField] private float forceOfGravity;
+    [SerializeField] private float _forceOfGravity = 1000;
 
-    private GUIManagerController guiMC;
+    private GUIManagerController _guiMC;
 
     private void FixedUpdate()
     {
         foreach(var obj in spaceObjects)
         {
             obj.transform.position = GetPositon(this.gameObject.transform.position, obj.GetComponent<TheSpace.SpaceObject>().distance, obj.GetComponent<TheSpace.SpaceObject>().currentAng, obj.GetComponent<TheSpace.SpaceObject>().offsetSin, obj.GetComponent<TheSpace.SpaceObject>().offsetCos); //Вращение вокруг объекта
-            obj.transform.position += ((this.gameObject.transform.position - obj.transform.position).normalized * forceOfGravity * Time.deltaTime) / (obj.GetComponent<TheSpace.SpaceObject>().mass*10);
+            obj.transform.position += ((this.gameObject.transform.position - obj.transform.position).normalized * _forceOfGravity * Time.deltaTime) / (obj.GetComponent<TheSpace.SpaceObject>().mass*10);
             obj.transform.Rotate(Vector3.up * obj.GetComponent<TheSpace.SpaceObject>().linearRotationSpeed/10000);
-            obj.GetComponent<TheSpace.SpaceObject>().currentAng += (forceOfGravity / (obj.GetComponent<TheSpace.SpaceObject>().mass*100000) * Time.deltaTime);
+            obj.GetComponent<TheSpace.SpaceObject>().currentAng += (_forceOfGravity / (obj.GetComponent<TheSpace.SpaceObject>().mass*100000) * Time.deltaTime);
         }
     }
 
@@ -35,9 +35,9 @@ public class BlackHole : MonoBehaviour
         if(this.gameObject.transform.localScale.x >= 1000000f) 
             Destroy(this.gameObject);
         this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x + 0.1f, this.gameObject.transform.localScale.y + 0.1f, this.gameObject.transform.localScale.z + 0.1f); 
-        forceOfGravity += this.gameObject.transform.localScale.x / 100f;
+        _forceOfGravity += this.gameObject.transform.localScale.x / 100f;
         this.gameObject.GetComponent<TheSpace.SpaceObject>().radius = System.Convert.ToSingle(PhysicsAstronomy.PhysicsFormuls.GetRadius(this.gameObject.transform.localScale.x, this.gameObject.GetComponent<TheSpace.SpaceObject>().power));
-        guiMC.radius.text = this.gameObject.GetComponent<TheSpace.SpaceObject>().radius.ToString() + " км";
+        _guiMC.radius.text = this.gameObject.GetComponent<TheSpace.SpaceObject>().radius.ToString() + " км";
     }
 
     private void OnTriggerEnter(Collider other) 

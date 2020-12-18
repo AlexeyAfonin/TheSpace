@@ -6,10 +6,10 @@ using TheSpace;
 
 public class MeshDestroy : MonoBehaviour
 {
-    private bool edgeSet = false;
-    private Vector3 edgeVertex = Vector3.zero;
-    private Vector2 edgeUV = Vector2.zero;
-    private Plane edgePlane = new Plane();
+    private bool _edgeSet = false;
+    private Vector3 _edgeVertex = Vector3.zero;
+    private Vector2 _edgeUV = Vector2.zero;
+    private Plane _edgePlane = new Plane();
 
     public int CutCascades = 50;
     public float ExplodeForce = 100;
@@ -86,7 +86,7 @@ public class MeshDestroy : MonoBehaviour
         for (var i = 0; i < original.Triangles.Length; i++)
         {
             var triangles = original.Triangles[i];
-            edgeSet = false;
+            _edgeSet = false;
 
             for (var j = 0; j < triangles.Length; j = j + 3)
             {
@@ -188,24 +188,24 @@ public class MeshDestroy : MonoBehaviour
 
     private void AddEdge(int subMesh, PartMesh partMesh, Vector3 normal, Vector3 vertex1, Vector3 vertex2, Vector2 uv1, Vector2 uv2)
     {
-        if (!edgeSet)
+        if (!_edgeSet)
         {
-            edgeSet = true;
-            edgeVertex = vertex1;
-            edgeUV = uv1;
+            _edgeSet = true;
+            _edgeVertex = vertex1;
+            _edgeUV = uv1;
         }
         else
         {
-            edgePlane.Set3Points(edgeVertex, vertex1, vertex2);
+            _edgePlane.Set3Points(_edgeVertex, vertex1, vertex2);
 
             partMesh.AddTriangle(subMesh,
-                                edgeVertex,
-                                edgePlane.GetSide(edgeVertex + normal) ? vertex1 : vertex2,
-                                edgePlane.GetSide(edgeVertex + normal) ? vertex2 : vertex1,
+                                _edgeVertex,
+                                _edgePlane.GetSide(_edgeVertex + normal) ? vertex1 : vertex2,
+                                _edgePlane.GetSide(_edgeVertex + normal) ? vertex2 : vertex1,
                                 normal,
                                 normal,
                                 normal,
-                                edgeUV,
+                                _edgeUV,
                                 uv1,
                                 uv2);
         }

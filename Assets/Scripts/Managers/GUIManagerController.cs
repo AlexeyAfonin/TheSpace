@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class GUIManagerController : MonoBehaviour
 {
     [Header ("UI панели")]
-    [SerializeField] private GameObject basicGameUIPanel;
-    [SerializeField] private GameObject moveGameUIPanel;
-    [SerializeField] private GameObject actionGameUIPanel;
-    [SerializeField] private GameObject structureGameUIPanel;
+    [SerializeField] private GameObject _basicGameUIPanel;
+    [SerializeField] private GameObject _moveGameUIPanel;
+    [SerializeField] private GameObject _actionGameUIPanel;
+    [SerializeField] private GameObject _structureGameUIPanel;
 
     [Header ("Right UIPanel - Главная")]
-    [SerializeField] private Camera cam;
+    [SerializeField] private Camera _cam;
     [HideInInspector] public GameObject selectSpaceObject;
     public GameObject excretion;
     public Text type;
@@ -29,76 +29,76 @@ public class GUIManagerController : MonoBehaviour
     public Text escapeVelocity;
        
     [Header("UI Панель с космическими оъектами")]
-    [SerializeField] private GameObject spaceObjectsPanell; //панель с космическими объектами
-    [SerializeField] private GameObject planets; //панель с планетами
-    [SerializeField] private GameObject satellites; //панель со спутниками
-    [SerializeField] private GameObject stars; //панель со звездами
-    [SerializeField] private GameObject blackholes; //панель с черными дырами
-    [SerializeField] private GameObject other; //панель с другими космическими объектами
+    [SerializeField] private GameObject _spaceObjectsPanel; //панель с космическими объектами
+    [SerializeField] private GameObject _planets; //панель с планетами
+    [SerializeField] private GameObject _satellites; //панель со спутниками
+    [SerializeField] private GameObject _stars; //панель со звездами
+    [SerializeField] private GameObject _blackholes; //панель с черными дырами
+    [SerializeField] private GameObject _other; //панель с другими космическими объектами
 
     [Header("UI pause панель")]
     public GameObject uiPausePanel; //открывающаяся панель при паузе 
 
-    private bool trackMovement = false;
+    private bool _trackMovement = false;
     private bool _zooming = false;
     private bool _zoomIn;
 
     public void OpenOrClosePanel()
     {
-        if(spaceObjectsPanell.activeSelf == true)
-            spaceObjectsPanell.SetActive(false);
+        if(_spaceObjectsPanel.activeSelf == true)
+            _spaceObjectsPanel.SetActive(false);
         else
-            spaceObjectsPanell.SetActive(true);
+            _spaceObjectsPanel.SetActive(true);
     }
     public void ShowPlanets()
     {
-        planets.SetActive(true);
-        satellites.SetActive(false);
-        stars.SetActive(false);
-        blackholes.SetActive(false);
-        other.SetActive(false);
+        _planets.SetActive(true);
+        _satellites.SetActive(false);
+        _stars.SetActive(false);
+        _blackholes.SetActive(false);
+        _other.SetActive(false);
     }
     public void ShowSatellites()
     {
-        planets.SetActive(false);
-        satellites.SetActive(true);
-        stars.SetActive(false);
-        blackholes.SetActive(false);
-        other.SetActive(false);
+        _planets.SetActive(false);
+        _satellites.SetActive(true);
+        _stars.SetActive(false);
+        _blackholes.SetActive(false);
+        _other.SetActive(false);
     }
     public void ShowStars()
     {
-        planets.SetActive(false);
-        satellites.SetActive(false);
-        stars.SetActive(true);
-        blackholes.SetActive(false);
-        other.SetActive(false);
+        _planets.SetActive(false);
+        _satellites.SetActive(false);
+        _stars.SetActive(true);
+        _blackholes.SetActive(false);
+        _other.SetActive(false);
     }
     public void ShowBlackHoles()
     {
-        planets.SetActive(false);
-        satellites.SetActive(false);
-        stars.SetActive(false);
-        blackholes.SetActive(true);
-        other.SetActive(false);
+        _planets.SetActive(false);
+        _satellites.SetActive(false);
+        _stars.SetActive(false);
+        _blackholes.SetActive(true);
+        _other.SetActive(false);
     }
     public void ShowOther()
     {
-        planets.SetActive(false);
-        satellites.SetActive(false);
-        stars.SetActive(false);
-        blackholes.SetActive(false);
-        other.SetActive(true);
+        _planets.SetActive(false);
+        _satellites.SetActive(false);
+        _stars.SetActive(false);
+        _blackholes.SetActive(false);
+        _other.SetActive(true);
     }
 
     public void Update()
     {
         if(selectSpaceObject != null)
         {
-            if(trackMovement)
+            if(_trackMovement)
             {
-                cam.gameObject.transform.position = new Vector3(selectSpaceObject.transform.position.x - selectSpaceObject.transform.localScale.x, selectSpaceObject.transform.localScale.y, selectSpaceObject.transform.position.z - selectSpaceObject.transform.localScale.z);
-                cam.gameObject.transform.LookAt(new Vector3(selectSpaceObject.transform.position.x, selectSpaceObject.transform.position.y, selectSpaceObject.transform.position.z));
+                _cam.gameObject.transform.position = new Vector3(selectSpaceObject.transform.position.x - selectSpaceObject.transform.localScale.x, selectSpaceObject.transform.localScale.y, selectSpaceObject.transform.position.z - selectSpaceObject.transform.localScale.z);
+                _cam.gameObject.transform.LookAt(new Vector3(selectSpaceObject.transform.position.x, selectSpaceObject.transform.position.y, selectSpaceObject.transform.position.z));
                 excretion.SetActive(false);
             }
             else
@@ -123,28 +123,28 @@ public class GUIManagerController : MonoBehaviour
     /*Панель "Главная"*/
     public void OpenBasicPanel()
     {
-        basicGameUIPanel.SetActive(true);
-        moveGameUIPanel.SetActive(false);
-        actionGameUIPanel.SetActive(false);
+        _basicGameUIPanel.SetActive(true);
+        _moveGameUIPanel.SetActive(false);
+        _actionGameUIPanel.SetActive(false);
     }
 
     /*Панель "Движение"*/
     public void OpenMovePanel()
     {
-        basicGameUIPanel.SetActive(false);
-        moveGameUIPanel.SetActive(true);
-        actionGameUIPanel.SetActive(false);
+        _basicGameUIPanel.SetActive(false);
+        _moveGameUIPanel.SetActive(true);
+        _actionGameUIPanel.SetActive(false);
     }
     public void TrackMovement() //Переключение камеры к космическому объекту
     {
-        trackMovement = true;
+        _trackMovement = true;
         excretion.SetActive(false);
     }
     public void TrackSolarSystem() //Переключение камеры к солнечной системе
     {
-        trackMovement = false;
-        cam.gameObject.transform.position = new Vector3(20000, 40000, 0);
-        cam.gameObject.transform.rotation = Quaternion.Euler(90, 0, 0);
+        _trackMovement = false;
+        _cam.gameObject.transform.position = new Vector3(20000, 40000, 0);
+        _cam.gameObject.transform.rotation = Quaternion.Euler(90, 0, 0);
         if(selectSpaceObject == null) excretion.SetActive(false);
     }
 
@@ -180,16 +180,16 @@ public class GUIManagerController : MonoBehaviour
         {
             if(_zoomIn)
             {
-                if(cam.gameObject.transform.position != new Vector3(500, 1000, 0))
+                if(_cam.gameObject.transform.position != new Vector3(500, 1000, 0))
                 {
-                    cam.gameObject.transform.position = new Vector3(cam.gameObject.transform.position.x - 250f, cam.gameObject.transform.position.y - 500f, cam.gameObject.transform.position.z);
+                    _cam.gameObject.transform.position = new Vector3(_cam.gameObject.transform.position.x - 250f, _cam.gameObject.transform.position.y - 500f, _cam.gameObject.transform.position.z);
                 }
             }
             else
             {
-                if(cam.gameObject.transform.position != new Vector3(20000, 40000, 0))
+                if(_cam.gameObject.transform.position != new Vector3(20000, 40000, 0))
                 {
-                    cam.gameObject.transform.position = new Vector3(cam.gameObject.transform.position.x + 250f, cam.gameObject.transform.position.y + 500f, cam.gameObject.transform.position.z);
+                    _cam.gameObject.transform.position = new Vector3(_cam.gameObject.transform.position.x + 250f, _cam.gameObject.transform.position.y + 500f, _cam.gameObject.transform.position.z);
                 }
             }
 
@@ -200,9 +200,9 @@ public class GUIManagerController : MonoBehaviour
     /*Панель "Действия"*/
     public void OpenActionPanel()
     {
-        basicGameUIPanel.SetActive(false);
-        moveGameUIPanel.SetActive(false);
-        actionGameUIPanel.SetActive(true);
+        _basicGameUIPanel.SetActive(false);
+        _moveGameUIPanel.SetActive(false);
+        _actionGameUIPanel.SetActive(true);
     }
     public void BlowUp() //Взорвать космический объект
     {

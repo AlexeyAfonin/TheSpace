@@ -7,12 +7,11 @@ using System.IO;
 public class GameManagerController : MonoBehaviour
 {
     [HideInInspector] public GameObject selectedObject;
-    private GUIManagerController guiMC;
-    private KeyCode Exit = KeyCode.Escape;
+    private GUIManagerController _guiMC;
 
     private void Start()
     {
-        guiMC = GameObject.FindWithTag("Manager").GetComponent<GUIManagerController>();
+        _guiMC = GameObject.FindWithTag("Manager").GetComponent<GUIManagerController>();
     }
 
     private void Update()
@@ -30,12 +29,12 @@ public class GameManagerController : MonoBehaviour
                 }
             }
         }
-        if(Input.GetKeyDown(Exit)) //Открытие панели "меню"
+        if(Input.GetKeyDown(KeyCode.Escape)) //Открытие панели "меню"
         {
-            if(guiMC.uiPausePanel.activeSelf) 
-                guiMC.uiPausePanel.SetActive(false);
+            if(_guiMC.uiPausePanel.activeSelf) 
+                _guiMC.uiPausePanel.SetActive(false);
             else 
-                guiMC.uiPausePanel.SetActive(true);
+                _guiMC.uiPausePanel.SetActive(true);
         }
 
         if(Input.GetKeyDown(KeyCode.Keypad0)) Time.timeScale = 0;

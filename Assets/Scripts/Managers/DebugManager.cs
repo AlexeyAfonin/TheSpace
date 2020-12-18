@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class DebugManager : MonoBehaviour
 {
     [Header ("FPS")]
-    [SerializeField] private Text fpsText;
-    [SerializeField] private float updateInterval = 0.5F;
-    private double lastInterval;
-    private float fps;
+    [SerializeField] private Text _fpsText;
+    [SerializeField] private float _updateInterval = 0.5F;
+    private double _lastInterval;
+    private float _fps;
     
     private void Awake()
     {
@@ -18,18 +18,18 @@ public class DebugManager : MonoBehaviour
 
     private void Start() 
     {
-        lastInterval = Time.realtimeSinceStartup;
+        _lastInterval = Time.realtimeSinceStartup;
     }
     
     private void Update() 
     {
         float timeNow = Time.realtimeSinceStartup;
-        if (timeNow > lastInterval + updateInterval) 
+        if (timeNow > _lastInterval + _updateInterval) 
         {
-            fps = 1.0f/Time.deltaTime;
-            lastInterval = timeNow;
+            _fps = 1.0f/Time.deltaTime;
+            _lastInterval = timeNow;
         }
         
-        fpsText.text = "FPS: " + fps.ToString("f2");
+        _fpsText.text = "FPS: " + _fps.ToString("f2");
     }
 }

@@ -936,9 +936,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1640016f0149a564888c4a7dbd363e2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIPanelStartPanel: {fileID: 425887521}
-  UIPanelSelectingGame: {fileID: 5245160}
-  UIPanelSettings: {fileID: 949826449}
+  _UIPanelStartPanel: {fileID: 425887521}
+  _UIPanelSelectingGame: {fileID: 5245160}
+  _UIPanelSettings: {fileID: 949826449}
 --- !u!328 &926632105
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -1611,13 +1611,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 332d86291f71b6446885f92937605ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSounds: []
-  volumeGameSlider: {fileID: 1174904004}
-  gameVolume: 0
-  musicSounds:
+  _gameSounds: []
+  _volumeGameSlider: {fileID: 1174904004}
+  _gameVolume: 100
+  _musicSounds:
   - {fileID: 1168950062}
-  volumeMusicSlider: {fileID: 881832294}
-  musicVolume: 0
+  _volumeMusicSlider: {fileID: 881832294}
+  _musicVolume: 50
 --- !u!4 &1168950061
 Transform:
   m_ObjectHideFlags: 0
@@ -2571,8 +2571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5c18af1137ff940887bfecaeb9a306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fpsText: {fileID: 155274264}
-  updateInterval: 0.5
+  _fpsText: {fileID: 155274264}
+  _updateInterval: 0.5
 --- !u!1 &1564201191
 GameObject:
   m_ObjectHideFlags: 0

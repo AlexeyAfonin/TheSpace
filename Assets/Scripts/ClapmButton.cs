@@ -5,26 +5,26 @@ using UnityEngine.EventSystems;
 
 public class ClapmButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
 {
-    private GUIManagerController guiMC;
+    private GUIManagerController _guiMC;
     public enum Element {Mass, Radius, Density, SurfaceTemperature};
     public Element changeElement;
     public enum Operatinon {Plus, Minus};
     public Operatinon operatinon;
-    private bool click = false;
+    private bool _click = false;
 
     private void Start()
     {
-        guiMC =  GameObject.FindWithTag("Manager").GetComponent<GUIManagerController>();
+        _guiMC =  GameObject.FindWithTag("Manager").GetComponent<GUIManagerController>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        click = true;
+        _click = true;
         StartCoroutine(Change());
     }
     public void OnPointerUp(PointerEventData eventData)
     {
-        click = false;
+        _click = false;
         StopCoroutine(Change());
     }
 
@@ -34,9 +34,9 @@ public class ClapmButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
         int multiplication = 1;
         int maxDuration = 100;
 
-        while(click)
+        while(_click)
         {
-            if(guiMC.selectSpaceObject != null)
+            if(_guiMC.selectSpaceObject != null)
             {
                 if(holdDuration >= maxDuration)
                 {
@@ -50,10 +50,10 @@ public class ClapmButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
                 {
                     switch(changeElement)
                     {
-                        case Element.Mass: guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().mass += 1*multiplication; break;
-                        case Element.Radius: guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().radius += 1*multiplication; break;
-                        case Element.Density: guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().density += 1*multiplication; break;
-                        case Element.SurfaceTemperature: guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().surfaceTemperature += 1*multiplication; break;
+                        case Element.Mass: _guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().mass += 1*multiplication; break;
+                        case Element.Radius: _guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().radius += 1*multiplication; break;
+                        case Element.Density: _guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().density += 1*multiplication; break;
+                        case Element.SurfaceTemperature: _guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().surfaceTemperature += 1*multiplication; break;
                     }
                 }
                 else if(operatinon == Operatinon.Minus)
@@ -61,18 +61,18 @@ public class ClapmButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler
                     switch(changeElement)
                     {
                         case Element.Mass: 
-                            if(guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().mass > 0)
-                                guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().mass -= 1*multiplication; 
+                            if(_guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().mass > 0)
+                                _guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().mass -= 1*multiplication; 
                             break;
                         case Element.Radius: 
-                            if(guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().radius > 0)
-                                guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().radius -= 1*multiplication;
+                            if(_guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().radius > 0)
+                                _guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().radius -= 1*multiplication;
                             break;
                         case Element.Density: 
-                            if(guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().density > 0)
-                                guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().density -= 1*multiplication; 
+                            if(_guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().density > 0)
+                                _guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().density -= 1*multiplication; 
                             break;
-                        case Element.SurfaceTemperature: guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().surfaceTemperature -= 1*multiplication; break;
+                        case Element.SurfaceTemperature: _guiMC.selectSpaceObject.GetComponent<TheSpace.SpaceObject>().surfaceTemperature -= 1*multiplication; break;
                     }
                 }
 

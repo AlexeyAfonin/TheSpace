@@ -8,8 +8,8 @@ namespace TheSpace
 
     public class SpaceObject : MonoBehaviour
     {
-        private GUIManagerController guiMC;
-        private GameManagerController gameMC;
+        private GUIManagerController _guiMC;
+        private GameManagerController _gameMC;
         private StarEvolution _starEvolution;
         public enum TypeObject {Planet, Satellite, Star, BlackHole}; //Список типов космических объектов
         public enum TypeStar {Light, Heavy}; //Список типов звезд
@@ -33,7 +33,7 @@ namespace TheSpace
         public float surfaceGravity; //Сила притяжения (сила ускорения свободного падения) | GM/R²
         public float firstSpaceSpeed; //Первая космическая скорость
         public float escapeVelocity; //Вторая космическая скорость (скорость убегания)
-        [SerializeField] private float distanceToTheSun; //Расстояние до солнца (N млн км)
+        [SerializeField] private float _distanceToTheAroundObject; //Расстояние до солнца (N млн км)
         public float linearRotationSpeed; //Сокрость линейного вращения (вокруг своей оси)
 
         [Header ("Состояния")]
@@ -49,31 +49,31 @@ namespace TheSpace
         [Header ("Настройки")]
         public int power;
         
-        private GameObject blackHole;
-        private bool attracts;
+        private GameObject _blackHole;
+        private bool _attracts;
         [HideInInspector] public bool screeningObject;
-        private Rigidbody rb;
+        private Rigidbody _rigidBody;
         
 
         private void Start()
         {
-            guiMC = GameObject.FindWithTag("Manager").GetComponent<GUIManagerController>();
-            gameMC = GameObject.FindWithTag("Manager").GetComponent<GameManagerController>();
+            _guiMC = GameObject.FindWithTag("Manager").GetComponent<GUIManagerController>();
+            _gameMC = GameObject.FindWithTag("Manager").GetComponent<GameManagerController>();
             _starEvolution = GameObject.FindWithTag("Manager").GetComponent<StarEvolution>();
-            rb = this.gameObject.GetComponent<Rigidbody>();
+            _rigidBody = this.gameObject.GetComponent<Rigidbody>();
 
-            if(aroundObject != null) distance = distanceToTheSun * 10; //дистанция между этим объектом и объектом, вогруг которого вращаемся
+            if(aroundObject != null) distance = _distanceToTheAroundObject * 10; //дистанция между этим объектом и объектом, вогруг которого вращаемся
         }
 
         private void Update()
         {
             /*Вычисления*/
-            totalVelocity = Convert.ToSingle(PhysicsFormuls.GetTotalVelocity(distanceToTheSun, rotationalPeriodAroundSun));
+            totalVelocity = Convert.ToSingle(PhysicsFormuls.GetTotalVelocity(_distanceToTheAroundObject, rotationalPeriodAroundSun));
             surfaceGravity = Convert.ToSingle(PhysicsFormuls.GetSurfaceGravity(mass, radius));
             escapeVelocity = Convert.ToSingle(PhysicsFormuls.GetSecondSpaceSpeed(surfaceGravity, radius));
             firstSpaceSpeed = Convert.ToSingle(PhysicsFormuls.GetFirstSpaceSpeed(mass, radius));
             linearRotationSpeed = Convert.ToSingle(PhysicsFormuls.GetLinerRotationSpeed(rotationalPeriodAroundAxis, radius));
-            rb.mass = mass/100;
+            _rigidBody.mass = mass/100;
 
             if(typeThisObject != TypeObject.BlackHole)
             {
@@ -84,26 +84,26 @@ namespace TheSpace
             /*Отправка данных в боковую UI панель*/
             if(onSelected)
             {
-                guiMC.selectSpaceObject = this.gameObject;
-                gameMC.selectedObject = this.gameObject;
+                _guiMC.selectSpaceObject = this.gameObject;
+                _gameMC.selectedObject = this.gameObject;
                 _starEvolution.selectedObject = this.gameObject;
 
-                if(typeThisObject == TypeObject.Planet)  guiMC.type.text = "Планета";
-                if(typeThisObject == TypeObject.Satellite)  guiMC.type.text = "Спутник";
-                if(typeThisObject == TypeObject.Star)  guiMC.type.text = "Звезда";
-                if(typeThisObject == TypeObject.BlackHole)  guiMC.type.text = "Черная дыра";
+                if(typeThisObject == TypeObject.Planet)  _guiMC.type.text = "Планета";
+                if(typeThisObject == TypeObject.Satellite)  _guiMC.type.text = "Спутник";
+                if(typeThisObject == TypeObject.Star)  _guiMC.type.text = "Звезда";
+                if(typeThisObject == TypeObject.BlackHole)  _guiMC.type.text = "Черная дыра";
                
-                guiMC.nameObj.text = nameObj;
-                guiMC.age.text = age.ToString() + " млн лет";
-                guiMC.mass.text = mass.ToString() + " * 10²⁴ кг";
-                guiMC.radius.text = radius.ToString() + " км";
-                guiMC.density.text = density.ToString() + " г/см³";
-                guiMC.surfaceTemperature.text = surfaceTemperature.ToString() + " °С";
-                guiMC.totalVelocity.text = totalVelocity.ToString() + " км/сек";
-                guiMC.rotationalPeriodAroundAxis.text = rotationalPeriodAroundAxis.ToString() + " часов";
-                guiMC.rotationalPeriodAroundSun.text = rotationalPeriodAroundSun.ToString() + " дней";
-                guiMC.surfaceGravity.text = surfaceGravity.ToString() + " м/сек²";
-                guiMC.escapeVelocity.text = escapeVelocity.ToString() + " км/сек";
+                _guiMC.nameObj.text = nameObj;
+                _guiMC.age.text = age.ToString() + " млн лет";
+                _guiMC.mass.text = mass.ToString() + " * 10²⁴ кг";
+                _guiMC.radius.text = radius.ToString() + " км";
+                _guiMC.density.text = density.ToString() + " г/см³";
+                _guiMC.surfaceTemperature.text = surfaceTemperature.ToString() + " °С";
+                _guiMC.totalVelocity.text = totalVelocity.ToString() + " км/сек";
+                _guiMC.rotationalPeriodAroundAxis.text = rotationalPeriodAroundAxis.ToString() + " часов";
+                _guiMC.rotationalPeriodAroundSun.text = rotationalPeriodAroundSun.ToString() + " дней";
+                _guiMC.surfaceGravity.text = surfaceGravity.ToString() + " м/сек²";
+                _guiMC.escapeVelocity.text = escapeVelocity.ToString() + " км/сек";
 
                 onSelected = false;
                 if(screeningObject) 
@@ -116,20 +116,20 @@ namespace TheSpace
         private void FixedUpdate()
         {
             /*Взаимодействие с черной дырой*/
-            if((blackHole != null)&&(typeThisObject != TypeObject.BlackHole))
+            if((_blackHole != null)&&(typeThisObject != TypeObject.BlackHole))
             {
-                if(!attracts) 
+                if(!_attracts) 
                 {
-                    blackHole.GetComponent<BlackHole>().spaceObjects.Add(this.gameObject);
-                    aroundObject = blackHole.transform;
-                    attracts = true;
+                    _blackHole.GetComponent<BlackHole>().spaceObjects.Add(this.gameObject);
+                    aroundObject = _blackHole.transform;
+                    _attracts = true;
                 }   
             }
             else 
             {
-                blackHole = GameObject.FindGameObjectWithTag("BlackHole"); //Ищем черную дыру на сцене
+                _blackHole = GameObject.FindGameObjectWithTag("BlackHole"); //Ищем черную дыру на сцене
 
-                if((aroundObject != null)&&(blackHole == null)) //Вращение объекта по орбите
+                if((aroundObject != null)&&(_blackHole == null)) //Вращение объекта по орбите
                 {
                     this.transform.position = GetPositon(aroundObject.position, distance, currentAng, offsetSin, offsetCos); //Вращение вокруг объекта
                     this.transform.Rotate(Vector3.up * linearRotationSpeed/1000); //Вращение вокруг своей оси
@@ -154,7 +154,7 @@ namespace TheSpace
         {
             yield return new WaitForSecondsRealtime(1f);
             
-            guiMC.excretion.SetActive(false);
+            _guiMC.excretion.SetActive(false);
 
             // Создаем камеру, с которой будем снимать
             Camera camera = new GameObject("ScreenShotCamera", typeof(Camera)).GetComponent<Camera>();
@@ -204,7 +204,7 @@ namespace TheSpace
             DestroyImmediate(rt);
 
             screeningObject = false;
-            guiMC.excretion.SetActive(true);
+            _guiMC.excretion.SetActive(true);
             
             yield return new WaitForSecondsRealtime(0.5f);
             StartCoroutine(UpdateButton());

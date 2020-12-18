@@ -10,7 +10,7 @@ public class LoadingScreenBarSystem : MonoBehaviour {
     public bool backGroundImageAndLoop;
     public float LoopTime;
     public GameObject[] backgroundImages;
-    [Range(0,1f)]public float vignetteEfectVolue; // Must be a value between 0 and 1
+    [Range(0,1f)] public float vignetteEfectVolue; // Must be a value between 0 and 1
     AsyncOperation async;
     Image vignetteEfect;
 

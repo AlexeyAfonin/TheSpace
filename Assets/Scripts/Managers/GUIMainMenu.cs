@@ -5,27 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class GUIMainMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject UIPanelStartPanel;
-    [SerializeField] private GameObject UIPanelSelectingGame;
-    [SerializeField] private GameObject UIPanelSettings;
+    [SerializeField] private GameObject _UIPanelStartPanel;
+    [SerializeField] private GameObject _UIPanelSelectingGame;
+    [SerializeField] private GameObject _UIPanelSettings;
 
     public void OpenUIStartGamePanel()
     {
-        UIPanelStartPanel.SetActive(false);
-        UIPanelSelectingGame.SetActive(true);
+        _UIPanelStartPanel.SetActive(false);
+        _UIPanelSelectingGame.SetActive(true);
     }
     public void OpenSettingsPanel()
     {
-        UIPanelStartPanel.SetActive(false);
-        UIPanelSettings.SetActive(true);
+        _UIPanelStartPanel.SetActive(false);
+        _UIPanelSettings.SetActive(true);
     }
     public void Back()
     {
-        if(UIPanelSelectingGame.activeSelf) 
-            UIPanelSelectingGame.SetActive(false);
+        if(_UIPanelSelectingGame.activeSelf) 
+            _UIPanelSelectingGame.SetActive(false);
         else
-            UIPanelSettings.SetActive(false);
-        UIPanelStartPanel.SetActive(true);
+            _UIPanelSettings.SetActive(false);
+        _UIPanelStartPanel.SetActive(true);
     }
     public void Exit()
     {
