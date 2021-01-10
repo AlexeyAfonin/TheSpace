@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spaceObjects: []
-  forceOfGravity: 1000
+  _forceOfGravity: 1000
 --- !u!114 &3861295428144255080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   nameObj: 
   age: 0
   mass: 0
-  radius: 0
+  radius: 695700
   density: 0
   surfaceTemperature: 0
   totalVelocity: 0
@@ -157,15 +157,15 @@ MonoBehaviour:
   surfaceGravity: 0
   firstSpaceSpeed: 0
   escapeVelocity: 0
-  distanceToTheSun: 0
+  _distanceToTheAroundObject: 0
   linearRotationSpeed: 0
   onSelected: 0
   exploded: 0
-  typeThisStar: 0
+  typeThisStar: 1
   stageLifeThisStar: 0
   nextStage: 0
   backStage: 0
-  power: 0
+  power: 15
   screeningObject: 0
 --- !u!1 &4155579607318438059
 GameObject:

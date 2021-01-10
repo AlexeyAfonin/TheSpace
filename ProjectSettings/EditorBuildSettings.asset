@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Simulation.unity
     guid: 99a7f34e91ecc174a9dcfa2e7454ea19
   - enabled: 1
+    path: Assets/Scenes/StageLiveStars.unity
+    guid: b60b03a7002b4e946b44190fc411a986
+  - enabled: 1
     path: Assets/Scenes/Sandbox.unity
     guid: 0aaf71a40a99be84caa62a49d43748c7
   m_configObjects: {}
